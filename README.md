@@ -36,8 +36,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 Your application must make use of the following libraries:
 
 - Postgres instance
-  (use `go get` to install these)
-- gorrila mux
+- gorrila mux (use `go get` to install this and lib pq)
 - lib pq
 
 ## Once the project is up and running we can test it using postman(/curl)
@@ -45,6 +44,8 @@ Your application must make use of the following libraries:
 1. Send a GET request to url [http://0.0.0.0:3000/customers/]
 2. Send a GET request to url [http://0.0.0.0:3000/customers/1222]
 3. Send a POST request to url [http://0.0.0.0:3000/customers] with the body containing the following raw json
+
+```
    {
    "id": 1456,
    "name": "Jack",
@@ -53,7 +54,11 @@ Your application must make use of the following libraries:
    "phone": "67898989",
    "contacted": false
    }
+```
+
 4. Send a PATCH request to url [http://localhost:3000/customers/1456] with the body containing the following raw json
+
+```
    {
    "name": "Jackie",
    "role": "Product Manager",
@@ -61,6 +66,8 @@ Your application must make use of the following libraries:
    "phone": "67898989",
    "contacted": true
    }
+```
+
 5. Send a DELETE request to url [http://localhost:3000/customers/1456]
 
 ## Database Creation
@@ -68,14 +75,14 @@ Your application must make use of the following libraries:
 ### 1. Setup Database
 
 It is time to create the database and the user with access privileges.
-'''
+
+```
 psql -U postgres
 CREATE DATABASE crm_customers;
 CREATE USER example_admin WITH PASSWORD 'somepassword';
 GRANT ALL PRIVILEGES ON DATABASE crm_customers TO example_admin;
 \c crm_customers
 CREATE EXTENSION citext;
-
 CREATE TABLE customers(
 id INT PRIMARY KEY,
 name VARCHAR(30),
@@ -83,14 +90,13 @@ role TEXT,
 email CITEXT UNIQUE,
 phone TEXT,
 contacted BOOLEAN);
-
 GRANT ALL PRIVILEGES ON TABLE customers TO example_admin;
-'''
+```
 
 ### 2. Insert Data to the table
 
-'''
+```
 INSERT INTO customers VALUES (1367, 'Rick', 'Software Engineer', 'rick@example.com', '55198989', true);
 INSERT INTO customers VALUES (1222, 'John', 'Data Analyst', 'john@example.com', '75198888', false);
 INSERT INTO customers VALUES (3243, 'Ron', 'Data Scientist', 'ron@example.com', '45201787', true);
-'''
+```
