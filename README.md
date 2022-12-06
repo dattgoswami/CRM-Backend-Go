@@ -36,8 +36,8 @@ These are the notes from a meeting with the frontend developer that describe wha
 Your application must make use of the following libraries:
 
 - Postgres instance
-- gorrila mux (use `go get` to install this and lib pq)
-- lib pq
+- gorrila mux -> use `go get -u github.com/gorilla/mux`
+- lib pq -> use `go get -u github.com/lib/pq`
 
 ## Once the project is up and running we can test it using postman(/curl)
 
