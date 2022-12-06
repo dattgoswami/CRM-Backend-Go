@@ -100,3 +100,11 @@ INSERT INTO customers VALUES (1367, 'Rick', 'Software Engineer', 'rick@example.c
 INSERT INTO customers VALUES (1222, 'John', 'Data Analyst', 'john@example.com', '75198888', false);
 INSERT INTO customers VALUES (3243, 'Ron', 'Data Scientist', 'ron@example.com', '45201787', true);
 ```
+
+## References:
+
+1. https://drstearns.github.io/tutorials/gojson/
+2. https://www.calhoun.io/connecting-to-a-postgresql-database-with-gos-database-sql-package/
+3. https://hugo-johnsson.medium.com/rest-api-with-golang-mux-mysql-c5915347fa5b
+4. https://dba.stackexchange.com/questions/68266/what-is-the-best-way-to-store-an-email-address-in-postgresql
+5. https://techinscribed.com/different-approaches-to-pass-database-connection-into-controllers-in-golang/
