@@ -46,13 +46,27 @@ func connectDatabase() {
 		fmt.Println("DB Error")
 	}
 
+	// _, err = DB.Exec(`DROP TABLE IF EXISTS customers;`)
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// _, err = DB.Exec(`CREATE TABLE customers(
+	// 						id INT PRIMARY KEY,
+	// 						name VARCHAR(30),
+	// 						role TEXT,
+	// 						email CITEXT UNIQUE,
+	// 						phone TEXT,
+	// 						contacted BOOLEAN);`)
+	// if err != nil {
+	// 	panic(err)
+	// }
 	fmt.Println("Successfully connected!")
 }
 
 func getCustomers(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var customers []Customers
-	result, err := DB.Query("SELECT * from customers")
+	result, err := DB.Query(`SELECT * from customers`)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -90,7 +104,7 @@ func getCustomer(w http.ResponseWriter, r *http.Request) {
 
 func addCustomer(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	stmt, err := DB.Prepare("INSERT INTO customers VALUES($1, $2, $3, $4, $5, $6)")
+	stmt, err := DB.Prepare(`INSERT INTO customers VALUES($1, $2, $3, $4, $5, $6)`)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -114,7 +128,7 @@ func addCustomer(w http.ResponseWriter, r *http.Request) {
 func updateCustomer(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
-	stmt, err := DB.Prepare("UPDATE customers SET name = $1, role = $2, email = $3, phone = $4, contacted = $5 WHERE id = $6")
+	stmt, err := DB.Prepare(`UPDATE customers SET name = $1, role = $2, email = $3, phone = $4, contacted = $5 WHERE id = $6`)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -140,7 +154,7 @@ func updateCustomer(w http.ResponseWriter, r *http.Request) {
 func deleteCustomer(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
-	stmt, err := DB.Prepare("DELETE FROM customers WHERE id = $1")
+	stmt, err := DB.Prepare(`DELETE FROM customers WHERE id = $1`)
 	if err != nil {
 		panic(err.Error())
 	}
